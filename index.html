@@ -22,14 +22,56 @@
             object-fit: cover;
         }
 
+        /* Estilos de la pantalla inicial */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 2;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            font-size: 1.5em; /* Tamaño de fuente reducido */
+            text-align: center;
+            opacity: 1;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .overlay h1 {
+            margin-bottom: 10px;
+            font-size: 2em; /* Tamaño de fuente reducido */
+        }
+
+        .overlay h2 {
+            font-size: 1em; /* Tamaño de fuente reducido */
+        }
+
+        /* Efecto de desenfoque del fondo */
+        .blurred-content {
+            filter: blur(10px);
+            transition: filter 1s ease-in-out;
+        }
+
+        /* Ocultar la pantalla inicial después de 3 segundos */
+        .hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
         /* Estilos del título */
         .title {
             text-align: center;
-            font-family: 'Great Vibes', cursive; /* Letra más elegante */
-            font-size: 2.5em; /* Tamaño más pequeño */
+            font-family: 'Great Vibes', cursive;
+            font-size: 2em;
             color: white;
             animation: fadeIn 2s ease-in-out;
-            margin-top: 10%; /* Levantado un poco más */
+            margin-top: 8%;
         }
 
         /* Animación para el título */
@@ -41,7 +83,7 @@
         /* Estilos del menú */
         .menu {
             text-align: center;
-            margin-top: 20px; /* Menú más cerca del título */
+            margin-top: 15px;
         }
 
         .menu ul {
@@ -51,20 +93,17 @@
 
         .menu ul li {
             display: inline-block;
-            margin: 0 5px; /* Espaciado más reducido */
-            padding: 6px 10px; /* Tamaño de botón reducido */
+            margin: 0 5px;
+            padding: 6px 10px;
             background-color: rgba(255, 255, 255, 0.8);
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s, box-shadow 0.3s, border 0.3s;
-            border: 2px solid transparent; /* Borde transparente al inicio */
+            transition: background-color 0.3s, box-shadow 0.3s;
         }
 
         .menu ul li:hover {
             background-color: rgba(255, 255, 255, 1);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Brillo al pasar el puntero */
-            border: 2px solid; /* Borde visible */
-            border-color: #ff5733; /* Color del borde para que brille */
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
         /* Estilos del dropdown */
@@ -84,30 +123,19 @@
             border-radius: 5px;
             opacity: 0;
             transform: translateY(-10px);
-            transition: all 0.5s ease-in-out; /* Animación de despliegue */
-        }
-
-        .dropdown-content li {
-            display: block;
-            padding: 10px;
-            text-align: left;
+            transition: all 0.5s ease-in-out;
         }
 
         .dropdown:hover .dropdown-content {
             display: block;
             opacity: 1;
-            transform: translateY(0); /* Animación al hacer hover */
+            transform: translateY(0);
+            animation: dropdownAnimation 0.5s ease;
         }
 
-        /* Efecto de brillo con colores en cada elemento del menú */
-        .menu-item:hover {
-            border-color: #f54291; /* Cambia el color de borde al pasar el cursor */
-            box-shadow: 0 0 10px rgba(245, 66, 145, 0.5);
-        }
-
-        .dropdown-content li:hover {
-            background-color: #f54291;
-            color: white;
+        @keyframes dropdownAnimation {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Estilos para el puntero personalizado */
@@ -124,7 +152,13 @@
         </video>
     </div>
 
-    <div class="content">
+    <!-- Pantalla de introducción -->
+    <div class="overlay" id="introOverlay">
+        <h1>MI PORTAFOLIO VIRTUAL</h1>
+        <h2>GRUPO 05</h2>
+    </div>
+
+    <div class="content blurred-content" id="mainContent">
         <h1 class="title">La extraño</h1>
         <nav class="menu">
             <ul>
@@ -149,7 +183,11 @@
     </div>
 
     <script>
-        // Si quieres añadir alguna funcionalidad adicional, puedes hacerlo aquí
+        // Ocultar la pantalla inicial después de 3 segundos
+        setTimeout(function() {
+            document.getElementById('introOverlay').classList.add('hide');
+            document.getElementById('mainContent').classList.remove('blurred-content');
+        }, 3000);
     </script>
 </body>
 </html>
