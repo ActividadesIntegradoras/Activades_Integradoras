@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La extraño</title>
     <style>
-        /* Estilos para el video de fondo */
         .video-background {
             position: fixed;
             top: 0;
@@ -21,8 +20,6 @@
             height: 100%;
             object-fit: cover;
         }
-
-        /* Estilos de la pantalla inicial */
         .overlay {
             position: fixed;
             top: 0;
@@ -51,36 +48,26 @@
         .overlay h2 {
             font-size: 1em;
         }
-
-        /* Efecto de desenfoque del fondo */
         .blurred-content {
             filter: blur(10px);
             transition: filter 1s ease-in-out;
         }
-
-        /* Ocultar la pantalla inicial después de 3 segundos */
         .hide {
             opacity: 0;
             pointer-events: none;
         }
-
-        /* Estilos del título */
         .title {
             text-align: center;
             font-family: 'Great Vibes', cursive;
-            font-size: 2em;
+            font-size: 2.2em;
             color: white;
             animation: fadeIn 2s ease-in-out;
-            margin-top: 5%;
+            margin-top: 3%;
         }
-
-        /* Animación para el título */
         @keyframes fadeIn {
             0% { opacity: 0; }
             100% { opacity: 1; }
         }
-
-        /* Estilos del menú */
         .menu {
             text-align: center;
             margin-top: 5px;
@@ -105,8 +92,6 @@
             background-color: rgba(255, 255, 255, 1);
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
-
-        /* Estilos del dropdown */
         .dropdown {
             position: relative;
             display: inline-block;
@@ -138,7 +123,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Estilos para el contenido dinámico */
         .content-section {
             display: none;
             text-align: center;
@@ -149,17 +133,14 @@
         .active-section {
             display: block;
         }
-
-        /* Estilos para las imágenes, nombres y audios en formato horizontal */
         .horizontal-container {
             display: flex;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
             gap: 50px;
-            margin-top: 20px;
+            margin-top: 10px;
         }
-
         .person-card {
             display: flex;
             flex-direction: column;
@@ -167,25 +148,25 @@
             align-items: center;
             text-align: center;
         }
-
         .person-card h3 {
-            font-size: 18px;
+            font-size: 20px;
             color: white;
             margin-bottom: 10px;
         }
-
         .person-card img {
             width: 160px;
             height: 160px;
             border-radius: 50%;
             object-fit: cover;
+            cursor: pointer;
+            transition: border 0.3s ease-in-out;
         }
-
+        .person-card img:hover {
+            border: 4px solid white;
+        }
         .person-card audio {
             margin-top: 10px;
         }
-
-        /* Estilos para el puntero personalizado */
         body {
             cursor: url('puntero.png'), auto;
         }
@@ -198,14 +179,10 @@
             <source src="fondo.mp4" type="video/mp4">
         </video>
     </div>
-
-    <!-- Pantalla de introducción -->
     <div class="overlay" id="introOverlay">
         <h1>MI PORTAFOLIO VIRTUAL</h1>
         <h2>GRUPO 05</h2>
     </div>
-
-    <!-- Contenido principal -->
     <div class="content blurred-content" id="mainContent">
         <h1 class="title">La extraño</h1>
 
@@ -229,45 +206,40 @@
                 </li>
             </ul>
         </nav>
-
-        <!-- Sección de presentación con las imágenes, nombres y audios -->
         <div class="content-section" id="presentacion">
             <h2>Presentación</h2>
             <div class="horizontal-container">
                 <div class="person-card">
                     <h3>Fabricio</h3>
-                    <img src="imagen.png" alt="Fabricio">
+                    <img src="Fabricio.png" alt="Fabricio" onclick="downloadPDF('archivo1.pdf')">
                     <audio controls src="audio1.mp3"></audio>
                 </div>
                 <div class="person-card">
                     <h3>Yonel</h3>
-                    <img src="imagen.png" alt="Yonel">
+                    <img src="imagen.png" alt="Yonel" onclick="downloadPDF('archivo2.pdf')">
                     <audio controls src="audio2.mp3"></audio>
                 </div>
                 <div class="person-card">
                     <h3>Fabricio Narro</h3>
-                    <img src="imagen.png" alt="Fabricio Narro">
+                    <img src="Narro.png" alt="Fabricio Narro" onclick="downloadPDF('archivo3.pdf')">
                     <audio controls src="audio3.mp3"></audio>
                 </div>
                 <div class="person-card">
-                    <h3>Pablito</h3>
-                    <img src="imagen.png" alt="Pablito">
+                    <h3>Pablito</h3>                    <img src="imagen.png" alt="Pablito" onclick="downloadPDF('archivo4.pdf')">
                     <audio controls src="audio4.mp3"></audio>
                 </div>
                 <div class="person-card">
                     <h3>Luis</h3>
-                    <img src="imagen.png" alt="Luis">
+                    <img src="imagen.png" alt="Luis" onclick="downloadPDF('archivo5.pdf')">
                     <audio controls src="audio5.mp3"></audio>
                 </div>
                 <div class="person-card">
-                    <h3>Pedro</h3>
-                    <img src="imagen.png" alt="Pedro">
+                    <h3>Otro Nombre</h3>
+                    <img src="imagen.png" alt="Otro Nombre" onclick="downloadPDF('archivo6.pdf')">
                     <audio controls src="audio6.mp3"></audio>
                 </div>
             </div>
         </div>
-
-        <!-- Otras secciones dinámicas -->
         <div class="content-section" id="diagnostico">
             <h2>Diagnóstico del Problema</h2>
             <p>Contenido del diagnóstico...</p>
@@ -277,39 +249,25 @@
             <h2>Narración Colectiva del Problema</h2>
             <p>Contenido de la narración...</p>
         </div>
-
-        <div class="content-section" id="causas">
-            <h2>Causas y Consecuencias</h2>
-            <p>Contenido de causas y consecuencias...</p>
-        </div>
-
-        <div class="content-section" id="fundamentacion">
-            <h2>Fundamentación del Problema</h2>
-            <p>Contenido de la fundamentación...</p>
-        </div>
     </div>
-
     <script>
-        // Función para ocultar la pantalla inicial
-        function hideOverlay() {
-            document.getElementById("introOverlay").classList.add("hide");
-            document.getElementById("mainContent").classList.remove("blurred-content");
-        }
-
-        // Mostrar sección dinámica
+        setTimeout(() => {
+            document.getElementById('introOverlay').classList.add('hide');
+            document.getElementById('mainContent').classList.remove('blurred-content');
+        }, 3000);
         function showSection(sectionId) {
-            // Ocultar todas las secciones
-            var sections = document.getElementsByClassName("content-section");
-            for (var i = 0; i < sections.length; i++) {
-                sections[i].classList.remove("active-section");
-            }
-
-            // Mostrar la sección seleccionada
-            document.getElementById(sectionId).classList.add("active-section");
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.remove('active-section'));
+            document.getElementById(sectionId).classList.add('active-section');
         }
-
-        // Ocultar la pantalla inicial después de 3 segundos
-        setTimeout(hideOverlay, 3000);
+        function downloadPDF(pdfUrl) {
+            const link = document.createElement('a');
+            link.href = pdfUrl;
+            link.download = pdfUrl.split('/').pop();
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
     </script>
 </body>
 </html>
