@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La extraño</title>
+    <style>
+        /* Estilos para el video de fondo */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Estilos del título */
+        .title {
+            text-align: center;
+            font-family: 'Great Vibes', cursive; /* Letra más elegante */
+            font-size: 2.5em; /* Tamaño más pequeño */
+            color: white;
+            animation: fadeIn 2s ease-in-out;
+            margin-top: 10%; /* Levantado un poco más */
+        }
+
+        /* Animación para el título */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Estilos del menú */
+        .menu {
+            text-align: center;
+            margin-top: 20px; /* Menú más cerca del título */
+        }
+
+        .menu ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .menu ul li {
+            display: inline-block;
+            margin: 0 5px; /* Espaciado más reducido */
+            padding: 6px 10px; /* Tamaño de botón reducido */
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s, border 0.3s;
+            border: 2px solid transparent; /* Borde transparente al inicio */
+        }
+
+        .menu ul li:hover {
+            background-color: rgba(255, 255, 255, 1);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Brillo al pasar el puntero */
+            border: 2px solid; /* Borde visible */
+            border-color: #ff5733; /* Color del borde para que brille */
+        }
+
+        /* Estilos del dropdown */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            top: 40px;
+            left: 0;
+            border-radius: 5px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.5s ease-in-out; /* Animación de despliegue */
+        }
+
+        .dropdown-content li {
+            display: block;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+            opacity: 1;
+            transform: translateY(0); /* Animación al hacer hover */
+        }
+
+        /* Efecto de brillo con colores en cada elemento del menú */
+        .menu-item:hover {
+            border-color: #f54291; /* Cambia el color de borde al pasar el cursor */
+            box-shadow: 0 0 10px rgba(245, 66, 145, 0.5);
+        }
+
+        .dropdown-content li:hover {
+            background-color: #f54291;
+            color: white;
+        }
+
+        /* Estilos para el puntero personalizado */
+        body {
+            cursor: url('puntero.png'), auto;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay loop muted>
+            <source src="fondo.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="content">
+        <h1 class="title">La extraño</h1>
+        <nav class="menu">
+            <ul>
+                <li class="menu-item">Presentación</li>
+                <li class="menu-item">Diagnóstico del Problema</li>
+                <li class="menu-item">Narración Colectiva del Problema</li>
+                <li class="menu-item">Causas y Consecuencias</li>
+                <li class="menu-item">Fundamentación del Problema</li>
+                <li class="dropdown">More
+                    <ul class="dropdown-content">
+                        <li>Objetivos del Proyecto</li>
+                        <li>Fundamentación Técnica</li>
+                        <li>Alternativa de Solución Creativa</li>
+                        <li>Estrategias del Proyecto</li>
+                        <li>Recursos del Proyecto</li>
+                        <li>Ficha de Monitoreo</li>
+                        <li>Ejecución del Proyecto</li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        // Si quieres añadir alguna funcionalidad adicional, puedes hacerlo aquí
+    </script>
+</body>
+</html>
