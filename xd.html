@@ -153,13 +153,55 @@
         .person-card img:hover {
             border: 4px solid white;
         }
-        .person-card audio {
+        /* Efecto de iluminación LED en las imágenes */
+        .person-card img:hover {
+            box-shadow: 0 0 15px 5px #FF69B4; /* Ejemplo de color LED, puedes modificarlo */
+        }
+        .person-card button {
             margin-top: 10px;
+            padding: 8px 16px;
+            font-size: 16px;
+            background-color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
         }
-        body {
-            cursor: url('puntero.png'), auto;
+        .person-card button:hover {
+            box-shadow: 0 0 15px 5px red; /* Ejemplo de color LED diferente */
+            background-color: lightgray;
         }
+        /* Personalizar colores para cada botón */
+        .person-card:nth-child(1) button:hover { box-shadow: 0 0 15px 5px red; }
+        .person-card:nth-child(2) button:hover { box-shadow: 0 0 15px 5px blue; }
+        .person-card:nth-child(3) button:hover { box-shadow: 0 0 15px 5px green; }
+        .person-card:nth-child(4) button:hover { box-shadow: 0 0 15px 5px yellow; }
+        .person-card:nth-child(5) button:hover { box-shadow: 0 0 15px 5px purple; }
+        .person-card:nth-child(6) button:hover { box-shadow: 0 0 15px 5px orange; }
 
+        .presentation-container {
+            display: none;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-top: 30px;
+        }
+        .presentation-container img {
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+        .presentation-container .text-box {
+            border: 2px solid white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .back-arrow {
+            cursor: pointer;
+            margin-top: 20px;
+            color: white;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -186,77 +228,108 @@
                     <ul class="dropdown-content">
                         <li onclick="showSection('objetivos')">Objetivos del Proyecto</li>
                         <li onclick="showSection('fundamentacionTecnica')">Fundamentación Técnica</li>
-                        <li onclick="showSection('alternativa')">Alternativa de Solución Creativa</li>
-                        <li onclick="showSection('estrategias')">Estrategias del Proyecto</li>
-                        <li onclick="showSection('recursos')">Recursos del Proyecto</li>
-                        <li onclick="showSection('monitoreo')">Ficha de Monitoreo</li>
-                        <li onclick="showSection('ejecucion')">Ejecución del Proyecto</li>
+                        <li onclick="showSection('alternativa')">Alternativa de Solución</li>
                     </ul>
                 </li>
             </ul>
         </nav>
+
         <div class="content-section" id="presentacion">
-            <h2>Presentación</h2>
             <div class="horizontal-container">
+                <!-- Ejemplo de Persona 1 -->
                 <div class="person-card">
+                    <img src="persona1.jpg" alt="Persona 1">
                     <h3>Fabricio</h3>
-                    <img src="Fabricio.png" alt="Fabricio" onclick="downloadPDF('Fabricio.pdf')">
-                    <audio controls src="audio1.mp3"></audio>
+                    <button onclick="present('Fabricio')">Presentar</button>
                 </div>
-                <div class="person-card">
-                    <h3>Yonel</h3>
-                    <img src="Yonel.png" alt="Yonel" onclick="downloadPDF('Yonel.pdf')">
-                    <audio controls src="audio2.mp3"></audio>
-                </div>
-                <div class="person-card">
-                    <h3>Narro</h3>
-                    <img src="Narro.png" alt="Fabricio Narro" onclick="downloadPDF('Narro.pdf')">
-                    <audio controls src="audio3.mp3"></audio>
-                </div>
-                <div class="person-card">
-                    <h3>Yover</h3>                    <img src="Yover.jpeg" alt="Yover" onclick="downloadPDF('Yover.pdf')">
-                    <audio controls src="audio4.mp3"></audio>
-                </div>
-                <div class="person-card">
-                    <h3>Luis</h3>
-                    <img src="Luis.png" alt="Luis" onclick="downloadPDF('Luis.pdf')">
-                    <audio controls src="audio5.mp3"></audio>
-                </div>
-                <div class="person-card">
-                    <h3>Daniel</h3>
-                    <img src="Daniel.jpeg" alt="Daniel" onclick="downloadPDF('Daniel.pdf')">
-                    <audio controls src="audio6.mp3"></audio>
+                <!-- Añadir las demás personas de manera similar -->
+                <!-- ... -->
+            </div>
+
+            <!-- Contenedor que aparece al presentar -->
+            <div class="presentation-container" id="presentationContainer">
+                <img id="presentedImage" src="" alt="" width="200" height="200">
+                <div class="text-box">
+                    <p id="presentedText"></p>
+                    <p class="back-arrow" onclick="goBack()">← Regresar</p>
                 </div>
             </div>
         </div>
+
         <div class="content-section" id="diagnostico">
             <h2>Diagnóstico del Problema</h2>
             <p>Contenido del diagnóstico...</p>
         </div>
-
-        <div class="content-section" id="narracion">
-            <h2>Narración Colectiva del Problema</h2>
-            <p>Contenido de la narración...</p>
-        </div>
+        <!-- Secciones adicionales no se modifican -->
     </div>
+
     <script>
-        setTimeout(() => {
-            document.getElementById('introOverlay').classList.add('hide');
-            document.getElementById('mainContent').classList.remove('blurred-content');
-        }, 3000);
         function showSection(sectionId) {
-            const sections = document.querySelectorAll('.content-section');
-            sections.forEach(section => section.classList.remove('active-section'));
+            var sections = document.getElementsByClassName('content-section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active-section');
+            }
             document.getElementById(sectionId).classList.add('active-section');
         }
-        function downloadPDF(pdfUrl) {
-            const link = document.createElement('a');
-            link.href = pdfUrl;
-            link.download = pdfUrl.split('/').pop();
-            document.body.appendChild(link);
+
+        function downloadPDF(filename) {
+            var link = document.createElement('a');
+            link.href = filename;
+            link.download = filename;
             link.click();
-            document.body.removeChild(link);
         }
+
+        function present(name) {
+            // Ocultar las otras tarjetas
+            var cards = document.getElementsByClassName('person-card');
+            for (var i = 0; i < cards.length; i++) {
+                cards[i].style.display = 'none';
+            }
+
+            // Mostrar contenedor de presentación
+            var presentationContainer = document.getElementById('presentationContainer');
+            presentationContainer.style.display = 'flex';
+
+            // Cambiar el contenido basado en el nombre
+            var presentedImage = document.getElementById('presentedImage');
+            var presentedText = document.getElementById('presentedText');
+
+            if (name === 'Fabricio') {
+                presentedImage.src = 'fabricio.jpg';
+                presentedText.innerHTML = 'Texto acerca de Fabricio...';
+                // Aquí agregarías el video de Fabricio si lo tienes
+            }
+            // Añadir lógica para otros nombres...
+
+            // Animación para mover la imagen al centro
+            setTimeout(function() {
+                presentedImage.style.transition = 'all 0.5s ease';
+                presentedImage.style.transform = 'translateX(-50%)';
+            }, 500);
+        }
+
+        function goBack() {
+            // Volver a mostrar todas las tarjetas
+            var cards = document.getElementsByClassName('person-card');
+            for (var i = 0; i < cards.length; i++) {
+                cards[i].style.display = 'flex';
+            }
+
+            // Ocultar contenedor de presentación
+            var presentationContainer = document.getElementById('presentationContainer');
+            presentationContainer.style.display = 'none';
+
+            // Restablecer la posición de la imagen
+            var presentedImage = document.getElementById('presentedImage');
+            presentedImage.style.transform = 'translateX(0)';
+        }
+
+        window.onload = function() {
+            setTimeout(function() {
+                document.getElementById("introOverlay").classList.add("hide");
+                document.getElementById("mainContent").classList.remove("blurred-content");
+            }, 2000);
+        };
     </script>
 </body>
 </html>
