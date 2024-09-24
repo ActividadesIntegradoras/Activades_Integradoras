@@ -136,6 +136,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
+            transition: all 0.5s ease-in-out;
         }
         .person-card h3 {
             font-size: 20px;
@@ -148,59 +149,69 @@
             border-radius: 50%;
             object-fit: cover;
             cursor: pointer;
-            transition: border 0.3s ease-in-out;
+            transition: box-shadow 0.3s ease-in-out;
         }
         .person-card img:hover {
-            border: 4px solid white;
+            box-shadow: 0 0 20px 5px rgba(0, 255, 0, 1);
         }
-        /* Efecto de iluminación LED en las imágenes */
-        .person-card img:hover {
-            box-shadow: 0 0 15px 5px #FF69B4; /* Ejemplo de color LED, puedes modificarlo */
-        }
-        .person-card button {
-            margin-top: 10px;
-            padding: 8px 16px;
-            font-size: 16px;
-            background-color: white;
+        button {
+            padding: 10px 15px;
+            background-color: rgba(255, 255, 255, 0.8);
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s, box-shadow 0.3s;
+            transition: background-color 0.3s ease-in-out;
         }
-        .person-card button:hover {
-            box-shadow: 0 0 15px 5px red; /* Ejemplo de color LED diferente */
-            background-color: lightgray;
+        button:hover {
+            background-color: rgba(255, 255, 255, 1);
         }
-        /* Personalizar colores para cada botón */
-        .person-card:nth-child(1) button:hover { box-shadow: 0 0 15px 5px red; }
-        .person-card:nth-child(2) button:hover { box-shadow: 0 0 15px 5px blue; }
-        .person-card:nth-child(3) button:hover { box-shadow: 0 0 15px 5px green; }
-        .person-card:nth-child(4) button:hover { box-shadow: 0 0 15px 5px yellow; }
-        .person-card:nth-child(5) button:hover { box-shadow: 0 0 15px 5px purple; }
-        .person-card:nth-child(6) button:hover { box-shadow: 0 0 15px 5px orange; }
-
-        .presentation-container {
+        body {
+            cursor: url('puntero.png'), auto;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        html {
+            height: 100%;
+        }
+        /* Animaciones al hacer clic en el botón */
+        .move-left {
+            transform: translateX(-400px);
+            transition: transform 1s ease-in-out;
+        }
+        .fade-out {
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+        .centered {
+            transform: translate(-50%, -50%) scale(1); /* Ajustar tamaño a la imagen original */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transition: all 1s ease-in-out;
+        }
+        .hidden {
             display: none;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            margin-top: 30px;
         }
-        .presentation-container img {
-            border-radius: 50%;
-            margin-right: 20px;
+        .video-container {
+            margin-left: 20px;
         }
-        .presentation-container .text-box {
-            border: 2px solid white;
-            padding: 20px;
-            border-radius: 10px;
+        .description-container {
+            background-color: rgba(220, 220, 220, 0.9); /* Cambiar color de fondo */
+            padding: 15px; /* Aumentar el padding */
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+            display: inline-block;
+            animation: float 3s infinite;
+            max-width: 300px; /* Ancho máximo */
+            color: black; /* Cambiar color de texto */
+            font-size: 1em; /* Tamaño de fuente */
         }
-        .back-arrow {
-            cursor: pointer;
-            margin-top: 20px;
-            color: white;
-            text-decoration: underline;
+        @keyframes float {
+            0%, 100% { transform: translatey(0px); }
+            50% { transform: translatey(-10px); }
+        }
+        .description-container:hover {
+            box-shadow: 0 0 20px rgba(0, 255, 0, 1);
         }
     </style>
 </head>
@@ -228,107 +239,131 @@
                     <ul class="dropdown-content">
                         <li onclick="showSection('objetivos')">Objetivos del Proyecto</li>
                         <li onclick="showSection('fundamentacionTecnica')">Fundamentación Técnica</li>
-                        <li onclick="showSection('alternativa')">Alternativa de Solución</li>
+                        <li onclick="showSection('alternativa')">Alternativa de Solución Creativa</li>
+                        <li onclick="showSection('estrategias')">Estrategias del Proyecto</li>
+                        <li onclick="showSection('recursos')">Recursos del Proyecto</li>
+                        <li onclick="showSection('monitoreo')">Ficha de Monitoreo</li>
+                        <li onclick="showSection('ejecucion')">Ejecución del Proyecto</li>
                     </ul>
                 </li>
             </ul>
         </nav>
-
         <div class="content-section" id="presentacion">
+            <h2>Presentación del Grupo</h2>
             <div class="horizontal-container">
-                <!-- Ejemplo de Persona 1 -->
-                <div class="person-card">
-                    <img src="persona1.jpg" alt="Persona 1">
+                <div class="person-card" id="fabricio">
                     <h3>Fabricio</h3>
-                    <button onclick="present('Fabricio')">Presentar</button>
+                    <img src="Fabricio.png" alt="Fabricio" onclick="downloadPDF('Fabricio.pdf')">
+                    <button onclick="selectPerson('fabricio', 'Fabricio.mp4', 'Fabricio es el líder del proyecto y se encarga de la coordinación general.')">Presentar</button>
                 </div>
-                <!-- Añadir las demás personas de manera similar -->
-                <!-- ... -->
+                <div class="person-card" id="yonel">
+                    <h3>Yonel</h3>
+                    <img src="Yonel.png" alt="Yonel" onclick="downloadPDF('Yonel.pdf')">
+                    <button onclick="selectPerson('yonel', 'video2.mp4', 'Yonel se especializa en la creación de contenido visual y multimedia.')">Presentar</button>
+                </div>
+                <div class="person-card" id="narro">
+                    <h3>Narro</h3>
+                    <img src="Narro.png" alt="Narro" onclick="downloadPDF('Narro.pdf')">
+                    <button onclick="selectPerson('narro', 'video3.mp4', 'Narro se especializa en la creación de contenido visual y multimedia.')">Presentar</button>
+                </div>
+                <div class="person-card" id="yover">
+                    <h3>Yover</h3>
+                    <img src="Yover.jpeg" alt="Yover" onclick="downloadPDF('Yover.pdf')">
+                    <button onclick="selectPerson('yover', 'Yover.mp4', 'Yover es responsable del diseño gráfico y la identidad visual del proyecto.')">Presentar</button>
+                </div>
+                <div class="person-card" id="luis">
+                    <h3>Luis</h3>
+                    <img src="Luis.png" alt="Luis" onclick="downloadPDF('Luis.pdf')">
+                    <button onclick="selectPerson('luis', 'video5.mp4', 'Luis gestiona la logística y los recursos del proyecto.')">Presentar</button>
+                </div>
+                <div class="person-card" id="daniel">
+                    <h3>Daniel</h3>
+                    <img src="Daniel.jpeg" alt="Daniel" onclick="downloadPDF('Daniel.pdf')">
+                    <button onclick="selectPerson('daniel', 'video6.mp4', 'Daniel es responsable de las relaciones públicas y la comunicación del equipo.')">Presentar</button>
+                </div>
             </div>
-
-            <!-- Contenedor que aparece al presentar -->
-            <div class="presentation-container" id="presentationContainer">
-                <img id="presentedImage" src="" alt="" width="200" height="200">
-                <div class="text-box">
-                    <p id="presentedText"></p>
-                    <p class="back-arrow" onclick="goBack()">← Regresar</p>
-                </div>
+            <div class="horizontal-container" id="presentationContainer" style="display: none;">
+                <img id="selectedPersonImage" class="centered" style="width: 160px; height: 160px; border-radius: 50%;" />
+                <video id="personVideo" width="200" controls class="hidden"></video>
+                <div class="description-container" id="personDescription" class="hidden"></div>
+                <button id="backButton" style="display: none;" onclick="backToSelection()">Regresar</button>
             </div>
         </div>
-
-        <div class="content-section" id="diagnostico">
-            <h2>Diagnóstico del Problema</h2>
-            <p>Contenido del diagnóstico...</p>
-        </div>
-        <!-- Secciones adicionales no se modifican -->
     </div>
-
     <script>
         function showSection(sectionId) {
-            var sections = document.getElementsByClassName('content-section');
-            for (var i = 0; i < sections.length; i++) {
-                sections[i].classList.remove('active-section');
-            }
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active-section');
+            });
             document.getElementById(sectionId).classList.add('active-section');
         }
 
-        function downloadPDF(filename) {
-            var link = document.createElement('a');
-            link.href = filename;
-            link.download = filename;
+        function selectPerson(personId, videoSource, descriptionText) {
+            const allCards = document.querySelectorAll('.person-card');
+            allCards.forEach(card => {
+                card.classList.add('fade-out');
+            });
+
+            const personCard = document.getElementById(personId);
+            const imgElement = personCard.querySelector('img');
+            const backButton = document.getElementById('backButton');
+
+            imgElement.classList.add('centered');
+
+            setTimeout(() => {
+                const selectedImage = document.getElementById('selectedPersonImage');
+                selectedImage.src = imgElement.src;
+
+                imgElement.classList.remove('centered');
+                imgElement.classList.add('fade-out');
+                
+                const videoElement = document.getElementById('personVideo');
+                const descriptionElement = document.getElementById('personDescription');
+
+                videoElement.src = videoSource;
+                videoElement.classList.remove('hidden');
+                descriptionElement.textContent = descriptionText;
+                descriptionElement.classList.remove('hidden');
+
+                backButton.style.display = 'inline-block';
+                document.getElementById('presentationContainer').style.display = 'flex';
+            }, 800);
+        }
+
+        function backToSelection() {
+            const allCards = document.querySelectorAll('.person-card');
+            allCards.forEach(card => {
+                card.classList.remove('fade-out');
+                card.classList.remove('hidden'); // Asegurarse de que las tarjetas sean visibles
+            });
+
+            const videoElement = document.getElementById('personVideo');
+            videoElement.pause(); // Detener el video
+            videoElement.currentTime = 0; // Reiniciar el video
+
+            document.getElementById('presentationContainer').style.display = 'none';
+            document.getElementById('backButton').style.display = 'none';
+            document.getElementById('personVideo').classList.add('hidden');
+            document.getElementById('personDescription').classList.add('hidden');
+
+            // No borrar la imagen de la persona seleccionada
+            const selectedImage = document.getElementById('selectedPersonImage');
+            selectedImage.src = ''; // Esto puede ser removido si no deseas que la imagen cambie
+        }
+
+        function downloadPDF(pdfFile) {
+            const link = document.createElement('a');
+            link.href = pdfFile;
+            link.download = pdfFile;
             link.click();
         }
 
-        function present(name) {
-            // Ocultar las otras tarjetas
-            var cards = document.getElementsByClassName('person-card');
-            for (var i = 0; i < cards.length; i++) {
-                cards[i].style.display = 'none';
-            }
-
-            // Mostrar contenedor de presentación
-            var presentationContainer = document.getElementById('presentationContainer');
-            presentationContainer.style.display = 'flex';
-
-            // Cambiar el contenido basado en el nombre
-            var presentedImage = document.getElementById('presentedImage');
-            var presentedText = document.getElementById('presentedText');
-
-            if (name === 'Fabricio') {
-                presentedImage.src = 'fabricio.jpg';
-                presentedText.innerHTML = 'Texto acerca de Fabricio...';
-                // Aquí agregarías el video de Fabricio si lo tienes
-            }
-            // Añadir lógica para otros nombres...
-
-            // Animación para mover la imagen al centro
-            setTimeout(function() {
-                presentedImage.style.transition = 'all 0.5s ease';
-                presentedImage.style.transform = 'translateX(-50%)';
-            }, 500);
-        }
-
-        function goBack() {
-            // Volver a mostrar todas las tarjetas
-            var cards = document.getElementsByClassName('person-card');
-            for (var i = 0; i < cards.length; i++) {
-                cards[i].style.display = 'flex';
-            }
-
-            // Ocultar contenedor de presentación
-            var presentationContainer = document.getElementById('presentationContainer');
-            presentationContainer.style.display = 'none';
-
-            // Restablecer la posición de la imagen
-            var presentedImage = document.getElementById('presentedImage');
-            presentedImage.style.transform = 'translateX(0)';
-        }
-
-        window.onload = function() {
-            setTimeout(function() {
-                document.getElementById("introOverlay").classList.add("hide");
-                document.getElementById("mainContent").classList.remove("blurred-content");
-            }, 2000);
+        window.onload = function () {
+            setTimeout(() => {
+                document.getElementById('introOverlay').classList.add('hide');
+                document.getElementById('mainContent').classList.remove('blurred-content');
+            }, 4000);
         };
     </script>
 </body>
